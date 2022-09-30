@@ -1,17 +1,52 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addCard } from "./cardsSlice";
-import goldChip from '../img/goldChip.png'
+import goldChip from '../img/goldChip2.png'
+import { useState } from "react";
+// import validator from 'validator' I DONT'T NEED YOU U STUPID
 
 const NewCard = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
   const { cards, latestId } = useSelector((state) => state.cards);
-  console.log(cards);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isValid, setIsValid] = useState(false)
+    
+ const validator = (str)=>{
+  const creditCardPattern = /^(?:4[0-9]{15}(?:[0-9]{3,6})?|5[1-5][0-9]{14}|(222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|6(?:011|5[0-9][0-9])[0-9]{12,15}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}|6[27][0-9]{14}|^(81[0-9]{14,17}))$/;
+  if (str==='')
+  {
+     return false;
+  }
+  if(!str.length===16){
+    return false;
+  }
+  if(creditCardPattern.test(str)){
+    console.log('matched!!!')
+    return true
+  }
+}
+  const validateCreditCard = (value) => {
+    if(value.length>4){
+    let joy =value.match(/.{1,4}/g);
+    document.getElementById("inputCardNumber").value = joy.join(' ')
+
+}else{
+  document.getElementById("inputCardNumber").value = value
+}
+if (validator(value)) {
+      setErrorMessage('Valid CreditCard Number');
+      setIsValid(true)
+    } else {
+      setErrorMessage('Enter valid CreditCard Number!')
+      setIsValid(false)
+    }
+  }
 
   const handleSubmit = (e) => {
      e.preventDefault();
+     if(isValid){
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData);
     //sätt in expiracy validation här, ändra formatet så länge
@@ -24,12 +59,12 @@ const NewCard = () => {
     formProps.id = latestId;
     console.log(formProps);
     dispatch(addCard(formProps));
+    document.getElementById("newCardForm").reset();}
   };
 
   let vendor ='';
   const inputChange = () => {
-    document.getElementById("inputCardNumber").value =
-      document.getElementById("cardNumber").value;
+    
     document.getElementById("inputDate").value = document
       .getElementById("validThru")
       .value.replace("20", "/")
@@ -43,46 +78,41 @@ const NewCard = () => {
     console.log(vendor)
   }
 
+
+
+
+
+
   return (
     <main>
       <section className={"card"} id={"card"}>
-       
-        <input
-          type="number"
-          id="inputCardNumber"
-          min="1000000000000000"
-          placeholder="0000000000000000"
-          readOnly
-        />
-         <div>
-        <img src={goldChip} alt="" height={'45px'} />
+         <article>
+        <img src={goldChip} alt="" height={'80px'} />
           {/* <img src="" alt="" />
         <img src="" alt="" /> */}
-        </div>
+        </article>
+        <article>
+         <input type="text" id="inputCardNumber"   placeholder="xxxx xxxx xxxx xxxx" readOnly  />
         <div>
-          <p>CARDHOLDER NAME</p>
-          <p>VALID THRU</p>
+          <span>CARDHOLDER NAME</span>
+          <span>VALID THRU</span>
         </div>
         <div>
           <p>{user}</p>
           <input type="text" id="inputDate" placeholder="00/00" readOnly />
         </div>
+        </article>
       </section>
 
 
-      <form onSubmit={handleSubmit} id="newCardForm" className="newCard" >
+      <form onSubmit={handleSubmit} id="newCardForm" >
         <label htmlFor="cardNumber">Card Number:</label>
-        <input
-          type="number"
-          name="cardNumber"
-          id="cardNumber"
-          min="1000000000000000"
-          max="9999999999999999"
-          placeholder="0000000000000000"
-          onChange={() => {inputChange();}}
-          required
-        />
-        <br />
+        <input type="text"  name="cardNumber" id="cardNumber"  placeholder="XXXX XXXX XXXX XXXX" required
+        maxLength={16}
+        onChange={(e) => validateCreditCard(e.target.value)}></input> 
+      
+        <span style={ isValid?{  color: 'green' }:{color: 'red'}}>{errorMessage}</span>
+      
         <label htmlFor="cardHolderName">Cardholder Name:</label>
         <input
           type="text"
@@ -91,8 +121,9 @@ const NewCard = () => {
           value={user}
           readOnly
         />
-        <br />
+      
         <div>
+          <div>
           <label htmlFor="validThru">Valid thru:</label>
           <input
             type="month"
@@ -103,9 +134,11 @@ const NewCard = () => {
             }}
             required
           />
+          </div>
+          <div>
           <label htmlFor="ccv">CCV:</label>
           <input
-            type="number"
+            type="text"
             name="ccv"
             id="ccv"
             min="0"
@@ -113,8 +146,9 @@ const NewCard = () => {
             placeholder="000"
             required
           />
+          </div>
         </div>
-        <br />
+      
         <label htmlFor="vendor">Vendor:</label>
         <select name="vendor" id="vendor" required  onChange={() => {updateVendor();}} >
           <option value="" selected disabled>Choose Vendor</option>
@@ -123,7 +157,7 @@ const NewCard = () => {
           <option value="ruptBank">Bank of Rupt</option>
           
         </select>
-        <br />
+      
         <input type="submit" value="Submit" />
       </form>
     </main>

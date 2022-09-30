@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
   box-sizing: border-box;
@@ -9,56 +13,156 @@ main {
   align-items: center;
   justify-content: center;
 }
-form{
-    border:1px solid black;
+form {
+  border: 1px solid black;
+  height: 300px;
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 20px;
+  text-align: left;
+  label {
+    font-size: 12px;
+  }
+  input,
+  select {
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 2px rgb(173, 172, 172);
+    [submit] {
+      background-color: darkred;
+      color: aliceblue;
+    }
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 .card {
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10px;
-  width: 330px;
-  min-height: 200px;
+  padding: 15px;
+  width: 350px;
+  height: 240px;
   border-radius: 20px;
   margin-bottom: 20px;
   background: lightgray;
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
+  article {
+ height: 50%;
+ span{
+  font-size: small;
+ }
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+    }
   }
-  &:hover{
+
+  &:hover {
     cursor: pointer;
   }
 }
-.newCard{
-  
+.img{
+  display: flex;
+  align-items: end;
+ }
+.ruptBank {
+  background-color: rgb(118, 171, 53);
+  background-image: url("../img/cardbackground2.png");
+  background-size: contain;
+  color: wheat;
+  input {
+    color:  wheat;
+  }
 }
-.ruptBank{
-background-color: rgb(118, 171, 53);
-}
-.notYourBank{
-background: rgb(32, 59, 133);
-color: aliceblue;
-input{
+.notYourBank {
   background: rgb(32, 59, 133);
   color: aliceblue;
-  border-style: none;
-  font-size: large;
-  text-align: center;
+  input {
+    background: rgb(32, 59, 133);
+    color: aliceblue;
+    border-style: none;
+    font-size: large;
+    text-align: center;
+  }
 }
+.comradeBank {
+  background-image: url("../img/cardbackground1.png");
+  background-size: contain;
+  color: gold;
+  input {
+    color: gold;
+  }
 }
-.comradeBank{
-    background-color: rgb(207, 90, 90);
-
+.active {
+  border: 5px solid goldenrod;
+  justify-self: flex-start;
+  order: -5;
+  &:hover {
+    cursor: default;
+  }
 }
-.active{
-    border: 5px solid goldenrod;
-    justify-self: flex-start;
-    order:-3;
-    &:hover{
-        cursor: default;
-      }
+#card {
+  &:hover {
+    cursor: default;
+  }
+  input {
+    border-style: none;
+    background: none;
+  
+  }
+  #inputCardNumber {
+    font-size: 30px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  #inputDate{
+    text-align: right;
+    font-size: 20px;
+    width: 50%;
+  }
+}
+a, button, input[type="submit"] {
+  text-decoration: none;
+  background: black;
+  color: antiquewhite;
+  padding: 10px;
+  border-radius: 5px;
+}
+a{
+  position: absolute;
+  bottom:20px;
+  left:35%;
+}
+.hide {
+  display: none;
+}
+aside{
+  height: 40px;
+  button{
+    margin: 0 10px;
+  }
+}
+p{
+  padding:0;
+  margin:0;
+  font-size: 20px;
+  font-weight: 500;
+}
+h3{
+  margin: 0 0 20px 0;
+  font-size: 30px;
+  font-weight: 500;
 }

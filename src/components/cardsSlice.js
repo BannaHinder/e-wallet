@@ -6,7 +6,7 @@ const cardsSlice = createSlice({
     status: "No data",
     cards: [
       {
-        cardNumber: "9999 9999 9999 9999",
+        cardNumber: "9999999999999999",
         cardHolderName: "LOADING",
         ccv: "999",
         validThru: "12/22",
