@@ -12,7 +12,7 @@ const NewCard = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
-  const { cards, latestId } = useSelector((state) => state.cards);
+  const { latestId } = useSelector((state) => state.cards);
   const [errorMessage, setErrorMessage] = useState('');
   const [isValid, setIsValid] = useState(false)
 
@@ -54,12 +54,17 @@ if (validator(value)) {
      if(isValid){
     let formData = new FormData(e.target);
     let formProps = Object.fromEntries(formData);
-    //sätt in expiracy validation här, ändra formatet så länge
+    //CHECKING CCV FORMAT
+      const ccvPattern = /^[0-9]{3}$/
+      if(!ccvPattern.test(formProps.ccv)){
+        console.log('Not a valid ccv')
+        return
+      }
+   //CHECKING VALIDITY
     const today = new Date()
     const formattedToday = today.getFullYear().toString() + '-' + (today.getMonth()+1).toString() //JÄVLA PISS GREJ VARFÖR RETURNERAS MÅNAD MED 0-BAS???? SHIT VAD LÅNG TID ET TOG O HITTA FELET
       let minimumDate = new Date(formattedToday + '-01')
       let inputDate = new Date(formProps.validThru + '-01')
-      console.log(minimumDate + '/' + inputDate)
       if(minimumDate.getTime()>inputDate.getTime()){
         console.log('the card is expired')
         return
@@ -73,7 +78,6 @@ if (validator(value)) {
     document.getElementById("newCardForm").reset();}
   };
 
-  let vendor ='';
   const inputChange = () => {
     
     document.getElementById("inputDate").value = document
@@ -129,7 +133,7 @@ if (validator(value)) {
         onChange={(e) => validateCreditCard(e.target.value)}></input> 
       
         <span style={ isValid?{  color: 'green' }:{color: 'red'}}>{errorMessage}</span>
-      
+
         <label htmlFor="cardHolderName">Cardholder Name:</label>
         <input
           type="text"
@@ -138,15 +142,10 @@ if (validator(value)) {
           value={user}
           readOnly
         />
-      
-        <div>
+        <div className="validity-ccv">
           <div>
           <label htmlFor="validThru">Valid thru:</label>
-          <input
-            type="month"
-            name="validThru"
-            id="validThru"
-            onChange={() => {
+          <input type="month" name="validThru" id="validThru"  onChange={() => {
               inputChange();
             }}
             required
@@ -158,8 +157,7 @@ if (validator(value)) {
             type="text"
             name="ccv"
             id="ccv"
-            min="0"
-            max="999"
+            maxLength={3}
             placeholder="000"
             required
           />
@@ -182,17 +180,3 @@ if (validator(value)) {
 };
 
 export default NewCard;
-
-//exempel på checka validity på kort
-
-// var today, someday;
-// var exMonth=document.getElementById("exMonth");
-// var exYear=document.getElementById("exYear");
-// today = new Date();
-// someday = new Date();
-// someday.setFullYear(exYear, exMonth, 1);
-
-// if (someday < today) {
-//    alert("The expiry date is before today's date. Please select a valid expiry date");
-//    return false;
-// }

@@ -22,9 +22,19 @@ form {
   height: 300px;
   width: 300px;
   display: flex;
+  margin-top: 40px;
   justify-content: space-around;
   flex-direction: column;
   text-align: left;
+  .validity-ccv{
+    display: flex;
+    flex-direction: row;
+    div{
+      align-items: flex-start;
+      display: flex;
+      width: 100%;
+    }
+  }
   label {
     font-size: 12px;
   }
@@ -33,21 +43,9 @@ form {
     padding: 5px;
     border-radius: 5px;
     border: solid 2px rgb(173, 172, 172);
-    [submit] {
-      background-color: darkred;
-      color: aliceblue;
-    }
   }
   #ccv{
     width:100%;
-  }
-  div {
-    display: flex;
-    justify-content: space-between;
-    div {
-      display: flex;
-      flex-direction: column;
-    }
   }
 }
 .card {
@@ -60,7 +58,7 @@ form {
   height: 240px;
   border-radius: 20px;
   margin-bottom: 20px;
-  background: rgb(226, 206, 219);
+  background: rgb(176, 174, 174);
   box-shadow: rgba(0, 0, 0, 0.486) 0px 2px 4px, rgba(0, 0, 0, 0.662) 0px 7px 13px -3px, rgba(198, 198, 198, 0.886) 0px -4px 0px inset;
   article {
  height: 50%;
@@ -136,7 +134,7 @@ form {
   input {
     border-style: none;
     background: none;
-  
+
   }
   #inputCardNumber {
     font-size: 30px;
@@ -160,6 +158,7 @@ a, button{
  input[type="submit"]{
   color:bisque;
   background: darkred;
+  padding: 10px;
  }
 .hide {
   display: none;
@@ -175,6 +174,10 @@ p{
   margin:0;
   font-size: 20px;
   font-weight: 500;
+}
+h2{
+  margin: 0 0 20px 0;
+  color: rgb(129, 129, 129);
 }
 h3{
   margin: 0 0 20px 0;
