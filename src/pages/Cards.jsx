@@ -13,7 +13,7 @@ const Cards = () => {
 
   return (
     <>
-    <h1>Your Wallet:</h1>
+    <header><h1>Your Wallet:</h1></header>
       <main>
         <h2>Active Card</h2>
         <div>
@@ -23,10 +23,9 @@ const Cards = () => {
           })}
           </div>
       </main>
-
-      <nav>
+          <footer><nav>
         <Link to="/addcard">Add new card</Link>
-      </nav>
+      </nav></footer>
     </>
   );
 };

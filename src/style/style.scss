@@ -1,9 +1,11 @@
 * {
   box-sizing: border-box;
 }
-
 .App {
   text-align: center;
+}
+footer{
+  height: 50px;
 }
 main {
   padding: 20px;
@@ -19,8 +21,6 @@ main {
   }
 }
 form {
-  height: 300px;
-  width: 300px;
   display: flex;
   margin-top: 40px;
   justify-content: space-around;
@@ -43,6 +43,7 @@ form {
     padding: 5px;
     border-radius: 5px;
     border: solid 2px rgb(173, 172, 172);
+    margin-bottom:10px;
   }
   #ccv{
     width:100%;

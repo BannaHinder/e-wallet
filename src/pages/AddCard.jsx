@@ -4,11 +4,11 @@ import NewCard from "../components/NewCard";
 const AddCard = () => {
   return (
     <>
-      <h1>addcard</h1>
+    <header><h1>addcard</h1></header>
       <NewCard />
-      <nav>
+      <footer><nav>
         <Link to="/cards">Back</Link>
-      </nav>
+      </nav></footer>
     </>
   );
 };

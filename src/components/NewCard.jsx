@@ -15,8 +15,8 @@ const NewCard = () => {
   const { latestId } = useSelector((state) => state.cards);
   const [errorMessage, setErrorMessage] = useState('');
   const [isValid, setIsValid] = useState(false)
+  const [logo, setLogo] = useState(null)
 
-  let logo=null;
     
  const validator = (str)=>{
   const creditCardPattern = /^(?:4[0-9]{15}(?:[0-9]{3,6})?|5[1-5][0-9]{14}|(222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|6(?:011|5[0-9][0-9])[0-9]{12,15}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}|6[27][0-9]{14}|^(81[0-9]{14,17}))$/;
@@ -91,11 +91,11 @@ if (validator(value)) {
     document.getElementById('card').classList.remove('ruptBank', 'comradeBank', 'notYourBank')
     document.getElementById('card').classList.add(e.target.value) 
     if(e.target.value==='ruptBank'){
-      logo= logo1;
+      setLogo(logo1);
         }else if(e.target.value==='comradeBank'){
-      logo= logo2;
+      setLogo(logo2);
         }else{
-      logo=logo3
+      setLogo(logo3)
         }
         console.log(logo)
   }
@@ -110,7 +110,7 @@ if (validator(value)) {
       <section className={"card"} id={"card"}>
       <article className="img">
           <img src={goldChip} alt="bank-chip" height={"80px"} />
-          {logo && (<img src={logo} alt="logo" className="logo" height={"70px"}/>)}
+          {logo && <img src={logo} alt="logo" className="logo" height={"70px"}/>}
         </article>
         <article>
          <input type="text" id="inputCardNumber"   placeholder="xxxx xxxx xxxx xxxx" readOnly  />
