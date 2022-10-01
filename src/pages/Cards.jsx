@@ -13,13 +13,15 @@ const Cards = () => {
 
   return (
     <>
-    <h1>cards</h1>
+    <h1>Your Wallet:</h1>
       <main>
-        
+        <h2>Active Card</h2>
+        <div>
         {cards &&
           cards.map((card) => {
             return <Card card={card} key={card.id} />;
           })}
+          </div>
       </main>
 
       <nav>
