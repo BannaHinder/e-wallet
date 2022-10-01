@@ -99,10 +99,11 @@ form {
   }
 }
 .notYourBank {
-  background: rgb(32, 59, 133);
+  background-image: url("../img/cardbackground3.png");
+  background-size: contain;
   color: aliceblue;
   input {
-    background: rgb(32, 59, 133);
+    background: rgb(32, 58, 131);
     color: aliceblue;
     border-style: none;
     font-size: large;
@@ -118,12 +119,20 @@ form {
   }
 }
 .active {
-
+  border: 1px solid rgb(102, 102, 102);
   justify-self: flex-start;
   order: -5;
   box-shadow:rgba(198, 198, 198, 0.886) 0px -4px 0px inset,
-  rgb(234, 255, 0) 0px 0px 7px 5px;
+  violet 5px 5px 10px,
+  rgb(255, 220, 47) -5px -5px 10px,
+  cyan -6px 4px 19px,
+  rgb(34, 255, 34) 6px -6px 15px,
+  yellow 10px 10px 15px
+  ;
   margin-bottom: 50px;
+
+
+
   &:hover {
     cursor: default;
   }
